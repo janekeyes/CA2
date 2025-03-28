@@ -22,6 +22,26 @@
   </div>
 
   <div>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= form.label :date_of_birth, style: "display: block" %>
+    <%= form.text_field :date_of_birth, start_year: 1950, end_year: Date.today.year %>
+  </div>
+
+  <div>
+    <%= form.label :job_role, style: "display: block" %>
+    <%= form.select :job_role, ['Data Analyst', 'Developer', 'Admin', 'Management'], prompt: "Select a Role" %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
