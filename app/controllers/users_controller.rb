@@ -2,8 +2,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # READ: Show all users
+  # def index
+  #   @users = User.all
+  # end
   def index
-    @users = User.all
+    if params[:job_role].present?
+      @users = User.where(job_role: params[:job_role])
+    else
+      @users = User.all.order(:last_name)
+    end
   end
 
   # READ: Show a single user
@@ -50,8 +57,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # def user_params
+  #   params.require(:user).permit(:username, :email, :first_name, :last_name, :date_of_birth, :job_role)
+  # end
   def user_params
-    params.require(:user).permit(:username, :email, :first_name, :last_name, :date_of_birth, :job_role)
+    if @user.new_record?
+      params.require(:user).permit(:first_name, :last_name, :email, :username, :date_of_birth, :job_role)
+    else
+      params.require(:user).permit(:first_name, :last_name, :email, :username) # Excluding date_of_birth and job_role for editing
+    end
   end
+  
   
 end

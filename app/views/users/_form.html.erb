@@ -2,7 +2,6 @@
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
         <% user.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -31,15 +30,27 @@
     <%= form.text_field :last_name %>
   </div>
 
-  <div>
-    <%= form.label :date_of_birth, style: "display: block" %>
-    <%= form.text_field :date_of_birth, start_year: 1950, end_year: Date.today.year %>
-  </div>
+  <% if user.new_record? %>  <!-- This condition is for the 'new' form -->
+    <div>
+      <%= form.label :date_of_birth, style: "display: block" %>
+      <%= form.date_field :date_of_birth %>
+    </div>
 
-  <div>
-    <%= form.label :job_role, style: "display: block" %>
-    <%= form.select :job_role, ['Data Analyst', 'Developer', 'Admin', 'Management'], prompt: "Select a Role" %>
-  </div>
+    <div>
+      <%= form.label :job_role, style: "display: block" %>
+      <%= form.select :job_role, ['Data Analyst', 'Developer', 'Admin', 'Management'], prompt: "Select a Role" %>
+    </div>
+  <% else %>  <!-- This condition is for the 'edit' form -->
+    <div>
+      <%= form.label :date_of_birth, style: "display: block" %>
+      <%= form.text_field :date_of_birth, value: user.date_of_birth, disabled: true, style: "background-color: lightgray;" %>
+    </div>
+
+    <div>
+      <%= form.label :job_role, style: "display: block" %>
+      <%= form.text_field :job_role, value: user.job_role, disabled: true, style: "background-color: lightgray;" %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.submit %>

@@ -1,4 +1,12 @@
+<div class="container">
 <h1>User List</h1>
+<%= form_with url: users_path, method: :get, local: true do |form| %>
+  <div>
+    <%= form.label :job_role, "Filter by Role" %>
+    <%= form.select :job_role, ['Data Analyst', 'Developer', 'Admin', 'Management'], { include_blank: 'All Roles' }, { onchange: 'this.form.submit()' } %>
+  </div>
+<% end %>
+
 <%= link_to "New User", new_user_path, class: "btn btn-primary" %>
 <table>
   <tr>
@@ -25,4 +33,4 @@
     </tr>
   <% end %>
 </table>
-
+</div>
