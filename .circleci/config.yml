@@ -2,16 +2,17 @@ version: 2.1
 
 jobs:
   build:
-    docker:
-      - image: circleci/node:latest  # Change this to match your project’s needs
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Run tests
-          command: npm test
+  working_directory: ~/Employees
+  docker:
+    - image: circleci/node:latest  # Change this to match your project’s needs
+  steps:
+    - checkout
+    - run:
+        name: Install dependencies
+        command: npm install
+    - run:
+        name: Run tests
+        command: npm test
 
 workflows:
   version: 2
