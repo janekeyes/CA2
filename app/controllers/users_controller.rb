@@ -37,13 +37,32 @@ class UsersController < ApplicationController
   end
 
   # UPDATE: Save updates
+  # def update
+  #   if @user.update(user_params)
+  #     redirect_to @user, notice: "User successfully updated!"
+  #   else
+  #     render :edit
+  #   end
+  # end
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: "User successfully updated!"
+      puts "Update successful: #{@user.inspect}" # Debugging line
+      respond_to do |format|
+        format.html { redirect_to @user, notice: "User was successfully updated." }
+        format.json { render :show, status: :ok, location: @user }
+        format.turbo_stream
+      end
     else
-      render :edit
+      puts "Update failed: #{@user.errors.full_messages}" # Debugging line
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.turbo_stream
+      end
     end
   end
+  
+  
 
   # DELETE: Remove user
   def destroy
@@ -61,12 +80,10 @@ class UsersController < ApplicationController
   #   params.require(:user).permit(:username, :email, :first_name, :last_name, :date_of_birth, :job_role)
   # end
   def user_params
-    if @user.new_record?
+    if action_name == "create"
       params.require(:user).permit(:first_name, :last_name, :email, :username, :date_of_birth, :job_role)
     else
-      params.require(:user).permit(:first_name, :last_name, :email, :username) # Excluding date_of_birth and job_role for editing
+      params.require(:user).permit(:first_name, :last_name, :email, :username)
     end
-  end
-  
-  
+  end 
 end
