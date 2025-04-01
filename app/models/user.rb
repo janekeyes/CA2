@@ -2,6 +2,9 @@ class User < ApplicationRecord
     validates :username, :first_name, :last_name, :email, :job_role, presence: true
     validates :date_of_birth, presence: true, on: :create
     validate :age_validation, on: :create
+    validates :username, uniqueness: {  case_sensitive: false, message: "This username is unavailable. Please choose another." },
+    length: { in: 8..16, message: "Username must be between 8 and 16 characters long." },
+    format: { with: /\A[a-zA-Z0-9]+\z/, message: "Username can only contain letters and numbers." }
 
     private 
 

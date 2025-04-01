@@ -37,13 +37,6 @@ class UsersController < ApplicationController
   end
 
   # UPDATE: Save updates
-  # def update
-  #   if @user.update(user_params)
-  #     redirect_to @user, notice: "User successfully updated!"
-  #   else
-  #     render :edit
-  #   end
-  # end
   def update
     if @user.update(user_params)
       puts "Update successful: #{@user.inspect}" # Debugging line
@@ -76,9 +69,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # def user_params
-  #   params.require(:user).permit(:username, :email, :first_name, :last_name, :date_of_birth, :job_role)
-  # end
   def user_params
     if action_name == "create"
       params.require(:user).permit(:first_name, :last_name, :email, :username, :date_of_birth, :job_role)
