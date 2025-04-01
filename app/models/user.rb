@@ -2,6 +2,7 @@ class User < ApplicationRecord
     validates :username, :first_name, :last_name, :email, :job_role, presence: true
     validates :date_of_birth, presence: true, on: :create
     validate :age_validation, on: :create
+    validates :username, uniqueness: {  case_sensitive: false, message: "This username is unavailable. Please choose another." }
 
     private 
 
