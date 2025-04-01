@@ -7,7 +7,7 @@ sudo apt update && sudo apt install -y nodejs npm
 sudo npm install -g pm2
 
 # Stop any running instance of the application
-pm2 stop simple_app 
+pm2 stop employees 
 
 # Install application dependencies
 npm install || true
