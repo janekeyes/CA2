@@ -7,7 +7,13 @@
   </div>
 <% end %>
 
-<%= link_to "New User", new_user_path, class: "btn btn-primary" %>
+<% if session[:username] == "superadmin" %>
+  <%= link_to "New User", new_user_path, class: "btn btn-primary" %>
+<% else %>
+  <p class="alert alert-danger">You must be logged in as <strong>superadmin</strong> to create a new user.</p>
+  <%= link_to "Login as Superadmin", login_path, class: "btn btn-warning" %>
+<% end %>
+
 <table>
   <tr>
     <th>Username</th>
