@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_superadmin, only: [:new, :create, :edit, :update]
+
 
   # READ: Show all users
   # def index
@@ -66,6 +68,21 @@ class UsersController < ApplicationController
   
 
   private
+
+  # def authenticate_superadmin
+  #   unless session[:username] == "superadmin" && session[:password] == "password25"
+  #     flash[:alert] = "Access denied. Only superadmin can perform this action."
+  #     redirect_to root_path
+  #   end
+  # end
+  def authenticate_superadmin
+    if session[:username] != "superadmin"
+      flash[:alert] = "Access denied. Only superadmin can perform this action."
+      redirect_to root_path and return
+    end
+  end
+  
+
 
   def set_user
     @user = User.find(params[:id])
