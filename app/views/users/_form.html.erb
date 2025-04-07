@@ -1,7 +1,7 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h4>
       <ul>
         <% user.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,61 +10,49 @@
     </div>
   <% end %>
 
-  <% if @user.errors.any? %>
-  <div class="alert alert-danger">
-    <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-
   <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
+    <%= form.label :username %>
+    <%= form.text_field :username, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, class: "form-input" %>
   </div>
 
-  <% if user.new_record? %>  <!-- This condition is for the 'new' form -->
+  <% if user.new_record? %>
     <div>
-      <%= form.label :date_of_birth, style: "display: block" %>
-      <%= form.date_field :date_of_birth %>
+      <%= form.label :date_of_birth %>
+      <%= form.date_field :date_of_birth, class: "form-input" %>
     </div>
 
     <div>
-      <%= form.label :job_role, style: "display: block" %>
-      <%= form.select :job_role, ['Data Analyst', 'Developer', 'Admin', 'Management'], prompt: "Select a Role" %>
+      <%= form.label :job_role %>
+      <%= form.select :job_role, ['Data Analyst', 'Developer', 'Admin', 'Management'], prompt: "Select a Role", class: "form-input" %>
     </div>
-  <% else %>  <!-- This condition is for the 'edit' form -->
+  <% else %>
     <div>
-      <%= form.label :date_of_birth, style: "display: block" %>
-      <%= form.text_field :date_of_birth, value: user.date_of_birth, disabled: true, style: "background-color: lightgray;" %>
+      <%= form.label :date_of_birth %>
+      <%= form.text_field :date_of_birth, value: user.date_of_birth, disabled: true, class: "form-input" %>
     </div>
 
     <div>
-      <%= form.label :job_role, style: "display: block" %>
-      <%= form.text_field :job_role, value: user.job_role, disabled: true, style: "background-color: lightgray;" %>
+      <%= form.label :job_role %>
+      <%= form.text_field :job_role, value: user.job_role, disabled: true, class: "form-input" %>
     </div>
   <% end %>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

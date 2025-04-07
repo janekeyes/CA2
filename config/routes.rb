@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'users#index'   # Set homepage to users list
-  resources :users     # Generates CRUD routes
+  root 'users#index'   
+  resources :users     
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
