@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:latest  # Change this to match your project’s needs
+      - image: circleci/node:latest  # npm installed latest 
     steps:
       - checkout
       - run:
