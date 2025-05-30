@@ -17,7 +17,7 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'rake', '13.2.1'
+gem 'rake', '13.3.0'
 
 
 # adds new rake file to updated for rails server!#
